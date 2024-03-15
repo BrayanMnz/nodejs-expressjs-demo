@@ -12,16 +12,18 @@ router.get("/request-headers", function (req, res, next) {
 });
 
 router.get("/class-signup", (req, res) => {
-
   res.render("forms/class-signup");
 });
 
 router.post("/class-signup/process", (req, res) => {
-
   console.log("Name (from visible form field): " + req.body.name);
   console.log("Email (from visible form field): " + req.body.email);
-  res.redirect(303, "/class-signup/thank-you");
 
+  /* Si en lugar de redireccionar hacemos un res.render("forms/class-signup-thankyou")
+  directamente, funciona. Pero la URL quedará mostrando class-signup/process 
+  y puede confundir.
+  */
+  res.redirect(303, "/class-signup/thank-you");
 });
 
 router.get("/class-signup/thank-you", (req, res) =>
