@@ -1,0 +1,13 @@
+<h3> Ejemplo usando with </h3>
+
+{{#with student.person}}
+  {{firstname}}
+  {{lastname}}
+{{/with}}
+
+<h3> Ejemplo - 2, usando with </h3>
+
+{{#with student.person as |people|}}
+  {{people.lastname}}
+  {{people.firstname}}
+{{/with}}

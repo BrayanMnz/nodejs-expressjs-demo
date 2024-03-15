@@ -1,0 +1,41 @@
+<h3> Listado de estudiantes ejemplo bloque #each</h3>
+
+<ol type="a">
+  {{#each students}}
+      <li>{{this}}</li>
+  {{/each}}
+</ol>
+
+
+<h3> Listado de estudiantes ejemplo bloque #if </h3>
+
+<ol type="a">
+  {{#each students}}
+    {{#if this}}
+      <li>{{this}}</li>
+    {{/if}}
+  {{/each}}
+</ol>
+
+<h3> Listado de estudiantes ejemplo bloque #unless </h3>
+
+<ol type="a">
+  {{#each students}}
+    {{#unless this}}
+      <li>{{this}}</li>
+    {{/unless}}
+  {{/each}}
+</ol>
+
+
+<h3> Listado de estudiantes ejemplo bloque else </h3>
+
+<ul >
+  {{#each students}}
+	{{#if this}}
+		<li>{{this}}</li>
+	{{else}}
+	<h4> Bloque else ejecutado </h4>
+  	{{/if}}	
+  {{/each}}	
+</ul>

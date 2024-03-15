@@ -7,8 +7,12 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var handlebarsRouter = require('./routes/handlebars-examples');
 
+const bodyParser = require('body-parser')
+
+
 var app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }))
 // Deshabilita el response header x-powered-by que Express inicializa con el valor Express
 //app.disable('x-powered-by')
 
