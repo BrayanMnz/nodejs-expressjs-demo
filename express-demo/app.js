@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var handlebarsRouter = require('./routes/handlebars-examples');
+var personRouter = require('./routes/person');
+
 
 const bodyParser = require('body-parser')
 
@@ -35,6 +37,7 @@ app.set('view cache', true)
 
 app.use('/', indexRouter);
 app.use('/handlebars-examples', handlebarsRouter);
+app.use('/person', personRouter);
 
 // captura los 404 y reenvia al controlador de errores
 app.use(function(req, res, next) {
