@@ -18,8 +18,8 @@ router.get("/class-signup", (req, res) => {
 
 router.post("/class-signup/process", (req, res) => {
 
-  console.log("Name (from visible form field): " + req.body.name);
-  console.log("Email (from visible form field): " + req.body.email);
+  console.log("Nombre enviado desde el formulario: " + req.body.name);
+  console.log("Email enviado desde el formulario: " + req.body.email);
   res.redirect(303, "/class-signup/thank-you");
 
 });
