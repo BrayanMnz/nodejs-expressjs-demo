@@ -12,22 +12,30 @@ router.get("/request-headers", function (req, res, next) {
 });
 
 router.get("/class-signup", (req, res) => {
-  res.render("forms/class-signup");
+  res.render("forms/class-signup", { layout: "layouts/handlebar" });
 });
 
-router.post("/class-signup/process", (req, res) => {
-  console.log("Name (from visible form field): " + req.body.name);
-  console.log("Email (from visible form field): " + req.body.email);
 
-  /* Si en lugar de redireccionar hacemos un res.render("forms/class-signup-thankyou")
-  directamente, funciona. Pero la URL quedará mostrando class-signup/process 
-  y puede confundir.
-  */
-  res.redirect(303, "/class-signup/thank-you");
+function handleClassSignup(req, res) {
+  console.log("Nombre enviado desde el formulario: " + req.body.name);
+  console.log("Email enviado desde el formulario: " + req.body.email);
+
+  if (req.url.includes("api")) {
+    return res.send({ result: "success" });
+  }
+  return res.redirect(303, "/class-signup/thank-you");
+}
+
+router.post("/class-signup/process", (req, res) => {
+  handleClassSignup(req, res);
+});
+
+router.post("/api/class-signup/process", (req, res) => {
+  handleClassSignup(req, res);
 });
 
 router.get("/class-signup/thank-you", (req, res) =>
-  res.render("forms/class-signup-thankyou")
+  res.render("forms/class-signup-thankyou", { layout: "layouts/handlebar" })
 );
 
 module.exports = router;
