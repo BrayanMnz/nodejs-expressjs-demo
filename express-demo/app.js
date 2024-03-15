@@ -13,11 +13,12 @@ const bodyParser = require('body-parser')
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
 // Deshabilita el response header x-powered-by que Express inicializa con el valor Express
 //app.disable('x-powered-by')
 
 // Configurando motor de plantillas, hbs - handlebars
-
 app.set('views', path.join(__dirname, 'views'));
 
 app.set('view engine', 'hbs');
