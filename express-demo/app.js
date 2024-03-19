@@ -1,16 +1,14 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser'); 
 var logger = require('morgan');
+const bodyParser = require('body-parser')
 
 var indexRouter = require('./routes/index');
 var handlebarsRouter = require('./routes/handlebars-examples');
 var personRouter = require('./routes/person');
-
-
-const bodyParser = require('body-parser')
-
+var cookiesRouter = require('./routes/cookies');
 
 var app = express();
 
@@ -38,6 +36,7 @@ app.set('view cache', true)
 app.use('/', indexRouter);
 app.use('/handlebars-examples', handlebarsRouter);
 app.use('/person', personRouter);
+app.use('/cookies', cookiesRouter);
 
 // captura los 404 y reenvia al controlador de errores
 app.use(function(req, res, next) {
