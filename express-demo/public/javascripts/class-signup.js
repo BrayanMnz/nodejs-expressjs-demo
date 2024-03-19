@@ -1,9 +1,14 @@
 document
   .getElementById("classSignupForm")
   .addEventListener("submit", (event) => {
-    event.preventDefault();
 
-    const form = event.target;
+    /*capturamos el evento submit generado al presionar el boton
+     pero lo cancelamos para que no se envie directamente
+    con event.preventDefault()
+    */
+    event.preventDefault(); //prevent default cancela el evento que se levanto.
+
+    const form = event.target; //el evento se disparo desde el objeto form, por lo que retorna el formulario.
     const body = JSON.stringify({
       name: form.elements.name.value,
       email: form.elements.email.value,
