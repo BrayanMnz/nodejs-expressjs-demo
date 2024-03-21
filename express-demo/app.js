@@ -3,7 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser'); 
 var logger = require('morgan');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const cookieSession = require('cookie-session');
+const expressSession = require('express-session') // La importamos a nuestro proyecto 
+
+
+
 
 var indexRouter = require('./routes/index');
 var handlebarsRouter = require('./routes/handlebars-examples');
@@ -12,8 +17,10 @@ var cookiesRouter = require('./routes/cookies');
 
 var app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+//app.use(cookieSession({name: 'SESSION_ID', maxAge: 60000, keys: ['key1']}));
+app.use(expressSession({resave: false, saveUninitialized: false, key: "MY_OTHER_SESSION", secret: "MY_SECRET"})) 
 
 // Deshabilita el response header x-powered-by que Express inicializa con el valor Express
 //app.disable('x-powered-by')

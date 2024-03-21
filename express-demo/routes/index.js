@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "TDA-252 Programación Web Avanzada" });
+  req.session.views = (req.session.views || 0 ) + 1;
+  req.session.userName = "Pepe";
+  res.render("index", { title: "TDA-252 Programación Web Avanzada", views: req.session.views});
+  
+  //res.render("index", { title: "TDA-252 Programación Web Avanzada" });
 });
 
 /* GET request-headers. */
@@ -12,6 +16,9 @@ router.get("/request-headers", function (req, res, next) {
 });
 
 router.get("/class-signup", (req, res) => {
+  if(req.session.userName == "Pepe"){
+    console.log("El usuario en sesion es Pepe");
+  }
   res.render("forms/class-signup", { layout: "layouts/handlebar" });
 });
 

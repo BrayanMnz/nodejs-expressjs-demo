@@ -3,7 +3,7 @@ var router = express.Router();
 const multiparty = require("multiparty");
 
 router.get("/signup", (req, res) => {
-  res.render("forms/person-signup");
+  res.render("forms/person-signup", { layout: "layouts/handlebar" });
 });
 
 router.post("/signup", (req, res) => {
