@@ -11,19 +11,17 @@ const expressSession = require('express-session') // La importamos a nuestro pro
 
 
 var indexRouter = require('./routes/index');
-var handlebarsRouter = require('./routes/handlebars-examples');
 var personRouter = require('./routes/person');
-var cookiesRouter = require('./routes/cookies');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(cookieSession({name: 'SESSION_ID', maxAge: 60000, keys: ['key1']}));
-app.use(expressSession({resave: false, saveUninitialized: false, key: "MY_OTHER_SESSION", secret: "MY_SECRET"})) 
+app.use(expressSession({resave: false, saveUninitialized: false, key: "SESSION_ID", secret: "MY_SECRET"})) 
 
 // Deshabilita el response header x-powered-by que Express inicializa con el valor Express
-//app.disable('x-powered-by')
+app.disable('x-powered-by')
 
 // Configurando motor de plantillas, hbs - handlebars
 app.set('views', path.join(__dirname, 'views'));
@@ -41,9 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view cache', true)
 
 app.use('/', indexRouter);
-app.use('/handlebars-examples', handlebarsRouter);
 app.use('/person', personRouter);
-app.use('/cookies', cookiesRouter);
+app.use('/login', loginRouter);
 
 // captura los 404 y reenvia al controlador de errores
 app.use(function(req, res, next) {

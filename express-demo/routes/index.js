@@ -3,25 +3,22 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  req.session.views = (req.session.views || 0 ) + 1;
-  req.session.userName = "Pepe";
-  res.render("index", { title: "TDA-252 Programación Web Avanzada", views: req.session.views});
-  
-  //res.render("index", { title: "TDA-252 Programación Web Avanzada" });
+  //req.session.userName = "Pepe";
+  if (req.session.userName) {
+    res.render("index", {
+      title: "TDA-252 Programación Web Avanzada",
+      usuario: req.session.userName,
+      layout: "layouts/handlebar" 
+    });
+  } else {
+    res.render("login", {});
+  }
 });
 
-/* GET request-headers. */
-router.get("/request-headers", function (req, res, next) {
-  res.render("headers", { title: "Request Headers", headers: req.headers });
-});
 
 router.get("/class-signup", (req, res) => {
-  if(req.session.userName == "Pepe"){
-    console.log("El usuario en sesion es Pepe");
-  }
   res.render("forms/class-signup", { layout: "layouts/handlebar" });
 });
-
 
 function handleClassSignup(req, res) {
   console.log("Nombre enviado desde el formulario: " + req.body.name);
